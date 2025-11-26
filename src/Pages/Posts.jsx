@@ -1,43 +1,52 @@
-import React,{useContext,useState,useEffect} from "react";
-
+import React, { useContext, useState, useEffect } from "react";
 import { ThemeContext } from "../context/Themecontext";
 
 const Posts = () => {
-    const {theme} = useContext(ThemeContext);
+    const { theme } = useContext(ThemeContext);
+
     const [posts, setPosts] = useState([
-           {id: 1, title: "First Post",likes: 45},
-           {id: 2, title: "Second Post",likes:56},
-           {id: 3, title: "Third Post", likes:5}    ]);
+        { id: 1, title: "First Post", likes: 45 },
+        { id: 2, title: "Second Post", likes: 56 },
+        { id: 3, title: "Third Post", likes: 5 }
+    ]);
+
     useEffect(() => {
-        document.title = `Posts -React Blog`;
-    }),[];
+        document.title = `Posts - React Blog`;
+    }, []);
 
     const like = (id) => {
-        const updatedPosts = posts.map(p => {
-            if(p.id === id){
-                return {...p, likes: p.likes + 1};
-            }
-            return p;
-        });
+        const updatedPosts = posts.map((post) =>
+            post.id === id ? { ...post, likes: post.likes + 1 } : post
+        );
         setPosts(updatedPosts);
-    }
+    };
+
     return (
-        <div className={`navigation ${theme}`}>
-           
-            <h1>Posts Page</h1>
-            <p>Welcome to the Posts Page</p>
-            <div>
-                {posts.map(post => (
-                    <div key={post.id} style={{marginBottom: "20px"}}>
-                        <h3>{post.title}</h3>
-                        <p>Likes: {post.likes}</p>
-                        <button onClick={() => like(post.id)}>Like</button>
+        <div className={`container mt-5 text-${theme === "light" ? "dark" : "light"}`}>
+            <h1 className="mb-4">Posts Page</h1>
+            <p className="lead">Welcome to the Posts Page</p>
+
+            <div className="row">
+                {posts.map((post) => (
+                    <div className="col-md-4 mb-4" key={post.id}>
+                        <div className="card shadow-sm h-100">
+                            <div className="card-body">
+                                <h5 className="card-title">{post.title}</h5>
+                                <p className="card-text">Likes: {post.likes}</p>
+                                <button
+                                    className="btn btn-primary"
+                                    onClick={() => like(post.id)}
+                                >
+                                    Like ❤️
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 ))}
             </div>
+
         </div>
-
     );
+};
 
-}
 export default Posts;

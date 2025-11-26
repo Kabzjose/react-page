@@ -9,7 +9,7 @@ const Home = () => {
         document.title = `Home Page`;
     })
     return (
-        <div className={`navigation ${theme}`}>
+        <div className={`container mt-5 text-${theme === "light" ? "dark" : "light"}`}>
            
             <h1>Home Page</h1>
             <p>Welcome to the Home Page</p>
