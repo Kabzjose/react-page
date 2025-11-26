@@ -11,7 +11,7 @@ import { ThemeContext } from "./context/Themecontext";
 function App() {
   const { theme } = useContext(ThemeContext);
   return (
-    <div className={`d-flex flex-column min-vh-100 ${theme === 'light' ? 'bg-white' : 'bg-dark'}`}>
+   <div className={`d-flex flex-column min-vh-100 w-100 ${theme === 'light' ? 'bg-light' : 'bg-dark'}`}>
     <ThemeProvider>
       <BrowserRouter>
         <Navigation/>
